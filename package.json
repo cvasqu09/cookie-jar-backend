@@ -1,0 +1,22 @@
+{
+  "name": "cookie-jar-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cvasqu09/cookie-jar-backend.git",
+  "author": "Chris.V <cvasqu09@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon"
+  },
+  "dependencies": {
+    "@types/express": "^4.16.1",
+    "express": "^4.16.4",
+    "ts-node": "^8.0.1",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
