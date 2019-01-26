@@ -11,4 +11,4 @@ export const messageStore = {
     {content: "where", timestamp: "123", fromMe: false},
     {content: "hell", timestamp: "123", fromMe: true},
   ]
-}
+};
