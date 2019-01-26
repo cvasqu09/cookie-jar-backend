@@ -1,21 +1,16 @@
-// equivalent of older: const express = require('express')
-import buildSchema from 'graphql';
-import bodyParser from 'body-parser';
 import { ApolloServer } from 'apollo-server';
-import { gql } from 'apollo-server';
 import { Query } from './typedefs/query';
 import { Message } from './typedefs/message';
+import { getMessages, getContacts } from './resolvers/query';
+import {Contact} from "./typedefs/contact";
 
-import { getMessages } from './resolvers/query';
-// import userRoutes from './routes/user-routes';
-
-
-const typeDefs = [Query, Message]
+const typeDefs = [Query, Message, Contact];
 const resolvers = {
   Query: {
-    getMessages: getMessages
+    getMessages: getMessages,
+    getContacts: getContacts
   }
-}
+};
 
 const server = new ApolloServer({typeDefs, resolvers})
 
