@@ -1,25 +1,25 @@
 // equivalent of older: const express = require('express')
-import express from 'express';
-const app = express();
-// Allow any method from any host and log requests
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE');
-    if('OPTIONS' === req.method) {
-        res.sendStatus(200);
-    } else {
-        console.log(`${req.ip} ${req.method} ${req.url}`);
-        next();
-    }
-});
-// Handle POST requests that come in formatted as JSON
-app.use(express.json())
-// A default hello word route
-app.get('/', (req, res) => {
-    res.send({hello: 'world'});
-});
-// start our server on port 4201
-app.listen(4201, function() {
-    console.log("Server now listening on 4201");
-});
+import buildSchema from 'graphql';
+import bodyParser from 'body-parser';
+import { ApolloServer } from 'apollo-server';
+import { gql } from 'apollo-server';
+import { Query } from './typedefs/query';
+import { Message } from './typedefs/message';
+
+import { getMessages } from './resolvers/query';
+// import userRoutes from './routes/user-routes';
+
+
+const typeDefs = [Query, Message]
+const resolvers = {
+  Query: {
+    getMessages: getMessages
+  }
+}
+
+const server = new ApolloServer({typeDefs, resolvers})
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT).then(() => {
+    console.log(`Listening on ${PORT}`);
+})
